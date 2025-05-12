@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 import UserPage from '@/features/users/pages/UserPage';
 import AlbumPage from '@/features/albums/pages/AlbumPage';
@@ -10,6 +10,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route element={<AdminLayout />}>
+        <Route index element={<Navigate to="/albums" replace />} />
           <Route path="/albums" index element={<AlbumPage />} />
           <Route path="/albums/:id" element={<AlbumDetailPage />} />
           <Route path="/users" element={<UserPage />} />

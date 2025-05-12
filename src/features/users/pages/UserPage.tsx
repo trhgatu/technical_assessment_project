@@ -1,7 +1,9 @@
+import UserList from "@/features/users/components/UserList"
+
 const UserPage = () => {
     return (
         <>
-        userpage
+        <UserList/>
         </>
     )
 }
