@@ -20,6 +20,7 @@ import {
   PaginationPrevious
 } from '@/components/ui/pagination';
 import { cn } from '@/lib/utils';
+import LoadingComponent from '@/components/common/Loading';
 
 const TOTAL_ALBUMS = 100;
 const LIMIT_OPTIONS = [10, 20, 50, 100];
@@ -65,7 +66,11 @@ const AlbumList: React.FC = () => {
     setSearchParams({ page: '1', limit: newLimit.toString() });
   };
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading){
+    return (
+      <LoadingComponent/>
+    )
+  }
 
   return (
     <div>
@@ -102,7 +107,7 @@ const AlbumList: React.FC = () => {
                       </Link>
                     </div>
                   ) : (
-                    'Loading...'
+                    <LoadingComponent/>
                   )}
                 </TableCell>
                 <TableCell>

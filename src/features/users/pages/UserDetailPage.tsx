@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table';
 import { getUserById, getAlbumsByUser, getAvatarUrl } from '@/services/api';
 import type { User, Album } from '@/types';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 
 const UserDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +36,13 @@ const UserDetailPage: React.FC = () => {
     fetchData();
   }, [userId]);
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Spin indicator={<LoadingOutlined spin />} size="large" />
+      </div>
+    );
+  }
   if (!user) return <div className="p-4">User not found</div>;
 
   return (

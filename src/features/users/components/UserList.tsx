@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { getUsers, getAvatarUrl } from '@/services/api';
 import type { User } from '@/types';
 import { Badge } from '@/components/ui/badge';
+import LoadingComponent from '@/components/common/Loading';
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -26,7 +27,11 @@ const UserList: React.FC = () => {
   }, []);
 
 
-  if (isLoading) return <>Loading...</>;
+ if (isLoading) {
+    return (
+     <LoadingComponent/>
+    );
+  }
 
   return (
     <div>

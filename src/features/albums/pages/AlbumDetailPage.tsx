@@ -5,7 +5,8 @@ import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getAlbumById, getPhotosByAlbumId, getUserById, getAvatarUrl } from '@/services/api';
 import type { Album, Photo, User } from '@/types';
-import { Image } from "antd"
+import { Image, Spin } from "antd"
+import { LoadingOutlined } from '@ant-design/icons'
 
 const AlbumDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -40,7 +41,14 @@ const AlbumDetailPage: React.FC = () => {
     fetchData();
   }, [albumId]);
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Spin indicator={<LoadingOutlined spin />} size="large" />
+      </div>
+    );
+  }
+
   if (!album) return <div className="p-4">Album not found</div>;
 
   return (
